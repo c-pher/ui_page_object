@@ -18,3 +18,9 @@ class ProductPage(BasePage):
     def should_be_right_price(self):
         assert self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text in \
                self.browser.find_element(*ProductPageLocators.ADDED_PRODUCT_MESSAGE_PRICE).text, 'Invalid price.'
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.ADDED_PRODUCT_MESSAGE), 'Message is visible'
+
+    def should_disappear_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.ADDED_PRODUCT_MESSAGE), 'Message does not disappeared.'
