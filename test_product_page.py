@@ -2,7 +2,9 @@ import time
 
 import pytest
 
+from .pages.basket_page import BasketPage
 from .pages.login_page import LoginPage
+from .pages.main_page import MainPage
 from .pages.product_page import ProductPage
 
 
@@ -69,7 +71,12 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     Ожидаем, что есть текст о том что корзина пуста
     """
 
-    pass
+    page = MainPage(browser, MainPage.link)
+    page.open()
+    page.go_to_basket_page()
+    basket_page = BasketPage(browser, BasketPage.link)
+    basket_page.should_be_empty()
+    basket_page.should_not_be_products()
 
 
 class TestUserAddToBasketFromProductPage:
